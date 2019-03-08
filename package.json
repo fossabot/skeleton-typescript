@@ -45,8 +45,8 @@
   "license": "MIT",
   "name": "@dl2/project-name",
   "scripts": {
-    "build": "tsnode tools/copy-files && tsc",
-    "build:fast": "tsnode tools/copy-files && tsc",
+    "build": "ts-node tools/copy-files && tsc",
+    "build:fast": "ts-node tools/copy-files && tsc",
     "format": "concurrently yarn:~prettier:* && concurrently 'yarn:~format:*'",
     "lint": "concurrently yarn:~lint:*",
     "prebuild": "yarn test",

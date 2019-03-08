@@ -35,7 +35,7 @@ emptyDir(outputDir)
       license,
       name,
       scripts: {
-        start: 'node src/index.js',
+        start: 'node index.js',
       },
       version: next,
     };
