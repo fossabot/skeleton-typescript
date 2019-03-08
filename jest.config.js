@@ -4,11 +4,11 @@
  */
 
 module.exports = {
-  moduleFileExtensions: ["js", "json", "jsx", "ts", "tsx"],
-  testEnvironment: "node",
-  testMatch: ["**/src/**/*.(spec|test).ts"],
+  moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx'],
+  testEnvironment: 'node',
+  testMatch: ['**/src/**/*.(spec|test).ts'],
   transform: {
-    "\\.(ts|tsx)": "ts-jest",
+    '\\.(ts|tsx)': 'ts-jest',
   },
   verbose: true,
 };

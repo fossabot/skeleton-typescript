@@ -3,24 +3,29 @@
  * Owlsome solutions. Owltstanding results.
  */
 
-const packages = require("../package.json");
-const { emptyDir, ensureDir, writeJson } = require("fs-extra");
-const { inc } = require("semver");
-const { resolve } = require("path");
+const { emptyDir, ensureDir, writeJson } = require('fs-extra');
+const { inc } = require('semver');
+const { resolve } = require('path');
+const packages = require('../package.json');
 
-const outputDir = resolve(__dirname, "../build");
-const sourceDir = resolve(__dirname, "..");
+const outputDir = resolve(__dirname, '../build');
+const sourceDir = resolve(__dirname, '..');
 
 const next = process.env.NEXT
   ? inc(packages.version, process.env.NEXT.toLowerCase())
   : packages.version;
 
-ensureDir(`${outputDir}/src`)
+emptyDir(outputDir)
+  .then(() => ensureDir(outputDir))
   .then(() => {
-    return emptyDir(outputDir);
-  })
-  .then(() => {
-    const { authors, dependencies, description, engines, license, name } = packages;
+    const {
+      authors,
+      dependencies,
+      description,
+      engines,
+      license,
+      name,
+    } = packages;
 
     const j = {
       authors,
@@ -29,6 +34,9 @@ ensureDir(`${outputDir}/src`)
       engines,
       license,
       name,
+      scripts: {
+        start: 'node src/index.js',
+      },
       version: next,
     };
 

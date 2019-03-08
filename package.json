@@ -15,6 +15,8 @@
     "@commitlint/config-angular": "^7.5",
     "@types/node": "^11.10",
     "concurrently": "^4.1",
+    "eslint": "^5.15.1",
+    "eslint-config-synacor": "^3.0.3",
     "fs-extra": "^7.0.1",
     "husky": "^1.3",
     "jest": "^24.1",
@@ -29,7 +31,7 @@
     "tslint": "^5.13",
     "tslint-consistent-codestyle": "^1.15",
     "tslint-eslint-rules": "^5.4",
-    "typescript": "^3.3"
+    "typescript": "^3"
   },
   "engines": {
     "node": "^9 || ^10"
@@ -37,23 +39,28 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -x @commitlint/config-angular -e",
-      "pre-commit": "yarn format"
+      "pre-commit": "yarn lint"
     }
   },
   "license": "MIT",
   "name": "@dl2/project-name",
   "scripts": {
-    "build": "node tools/copy-files && tsc",
-    "build:fast": "node tools/copy-files && tsc",
-    "format": "concurrently yarn:~prettier:* && yarn lint --fix",
-    "lint": "tslint -p tsconfig.json",
+    "build": "tsnode tools/copy-files && tsc",
+    "build:fast": "tsnode tools/copy-files && tsc",
+    "format": "concurrently yarn:~prettier:* && concurrently 'yarn:~format:*'",
+    "lint": "concurrently yarn:~lint:*",
     "prebuild": "yarn test",
-    "prestart": "yarn ~setup",
+    "pretest": "yarn lint",
     "test": "NODE_ENV=test jest",
-    "~prettier": "prettier --ignore-path .gitignore --arrow-parens always --print-width 84 --trailing-comma all --write",
-    "~prettier:others": "yarn ~prettier '**/*.?(js|json)'",
-    "~prettier:typescript": "yarn ~prettier --parser typescript '**/*.ts'",
-    "~setup": "yarn"
+    "~format:js": "yarn ~lint:js --fix",
+    "~format:styles": "yarn ~lint:styles --fix",
+    "~format:ts": "yarn ~lint:ts --fix",
+    "~lint:js": "eslint --ignore-path .gitignore .",
+    "~lint:styles": "stylelint 'src/**/*.scss'",
+    "~lint:ts": "tslint -p tsconfig.json",
+    "~prettier": "prettier --arrow-parens always --print-width 79 --trailing-comma all --write",
+    "~prettier:others": "yarn ~prettier '**/*.?(html|js|json)'",
+    "~prettier:ts": "yarn ~prettier --parser typescript '**/*.ts'"
   },
   "version": "0.0.0"
 }

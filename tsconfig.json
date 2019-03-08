@@ -1,23 +1,23 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "declaration": false,
+    "baseUrl": ".",
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2017", "es5", "es6"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "build/src",
+    "noImplicitUseStrict": false,
+    "outDir": "build",
+    "paths": {
+      "*": ["types/*"]
+    },
     "resolveJsonModule": true,
-    "sourceMap": false,
+    "sourceMap": true,
+    "strict": true,
     "target": "es5",
-    "typeRoots": ["node_modules/@types", "src/types"]
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": [
-    "node_modules/**/*",
-    "src/**/*.d.ts",
-    "src/**/*.spec.ts",
-    "src/pages"
-  ],
+  "exclude": ["node_modules", "src/**/*.spec.ts"],
   "include": ["src/**/*"]
 }
